@@ -15,6 +15,7 @@ from rest_framework.permissions import IsAdminUser
 from accounts.models import User
 from cart.forms import ProductCartAddForm
 from products.models import Product, ProductCategoryItem, ProductReal
+from products.permissions import IsMarketMasterOrAdminUser
 from products.serializers import ProductSerializer, ProductCreateSerializer, ProductRealSerializer, \
     ProductPatchSerializer, ProductRealCreateSerializer
 from qna.forms import QuestionForm
@@ -29,8 +30,7 @@ def search_by_elastic(request: HttpRequest):
         "http://192.168.56.102:9200", http_auth=('elastic', 'elasticpassword'), )
 
     elastic_sql = f"""
-        SELECT
-        id
+        SELECT id
         FROM
         sample1_dev___products_product_type_2___v1
         WHERE
@@ -219,6 +219,77 @@ def product_unpick(request: HttpRequest, product_id):
     request.user.picked_products.remove(product_id)
     messages.success(request, f"{product_id}번 상품에 좋아요 취소.")
     return redirect("products:detail", product_id=product_id)
+
+
+# 마켓관리자용 뷰 시작
+# TODO 3주차 설명, Admin 용 상품 리스트와 생성 처리 뷰
+class MarketApiProductListCreateView(ListCreateAPIView):
+    # admin만 사용가능 하도록
+    permission_classes = [IsMarketMasterOrAdminUser]
+
+    def get_queryset(self):
+        market_id = self.kwargs['market_id']
+
+        return Product \
+            .objects \
+            .filter(market_id=market_id) \
+            .prefetch_related('market') \
+            .prefetch_related('product_reals') \
+            .prefetch_related('cate_item') \
+            .all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ProductSerializer
+        else:
+            return ProductCreateSerializer
+
+
+# TODO 3주차 설명, Admin 용 상품 단건조회, 수정(PATCH), 삭제 처리 뷰
+class MarketApiProductRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsMarketMasterOrAdminUser]
+
+    # 일부러 PUT을 없애기 위해
+    allowed_methods = ('GET', 'PATCH', 'DELETE', 'OPTION')
+
+    def get_queryset(self):
+        market_id = self.kwargs['market_id']
+
+        return Product \
+            .objects \
+            .filter(market_id=market_id) \
+            .prefetch_related('market') \
+            .prefetch_related('product_reals') \
+            .all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ProductSerializer
+        else:
+            return ProductPatchSerializer
+
+
+# TODO 3주차 설명, Admin 용 상품 단건조회, 수정(PATCH), 삭제 처리 뷰
+class MarketApiProductRealListCreateView(ListCreateAPIView):
+    permission_classes = [IsMarketMasterOrAdminUser]
+
+    def create(self, request, *args, **kwargs):
+        request.data.update({'product': kwargs['product_id']})
+        return super().create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        market_id = self.kwargs['market_id']
+        product_id = self.kwargs['product_id']
+
+        return ProductReal \
+            .objects \
+            .filter(product__market_id=market_id, product=product_id)
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ProductRealSerializer
+        else:
+            return ProductRealCreateSerializer
 
 
 # 최종관리자용 뷰 시작

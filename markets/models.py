@@ -11,7 +11,9 @@ from tags.models import Tag
 
 class Market(models.Model):
     class Meta:
-        ordering = ['-id']
+        ordering = ('-id',)
+        verbose_name = '마켓들'
+        verbose_name_plural = '마켓'
 
     def __str__(self):
         return f"{self.id}, {self.name}"

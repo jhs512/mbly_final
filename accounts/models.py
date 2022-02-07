@@ -88,14 +88,14 @@ class User(AbstractUser):
         login(request, user)
 
     @property
-    def provider_link(self):
+    def provider_link(self) -> str:
         if self.provider_type_code == 'kakao':
             return "https://developers.kakao.com"
 
         return "https://site7.public.473.be"
 
     @property
-    def profile_img_url(self):
+    def profile_img_url(self) -> str:
         if self.profile_img:
             return self.profile_img.url;
         return resolve_url('pydenticon_image', data=self.username)
@@ -123,7 +123,7 @@ class User(AbstractUser):
         user.send_welcome_email()
 
     # https://github.com/askcompany-kr/django-with-react-rev2/ 참조
-    def send_welcome_email(self):
+    def send_welcome_email(self) -> None:
         if not self.email:
             return
 

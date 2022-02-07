@@ -16,4 +16,7 @@ urlpatterns = [
     path('admin_api/', views.AdminApiProductListCreateView.as_view(), name='admin_api'),
     path('admin_api/<int:pk>/', views.AdminApiProductRetrieveUpdateDestroyView.as_view(), name='admin_api_item'),
     path('admin_api/<int:product_id>/reals/', views.AdminApiProductRealListCreateView.as_view(), name='admin_api_reals'),
+    path('market_api/<int:market_id>/', views.MarketApiProductListCreateView.as_view(), name='market_api'),
+    path('market_api/<int:market_id>/<int:pk>/', views.MarketApiProductRetrieveUpdateDestroyView.as_view(), name='market_api_item'),
+    path('market_api/<int:market_id>/<int:product_id>/reals/', views.MarketApiProductRealListCreateView.as_view(), name='market_api_reals'),
 ]

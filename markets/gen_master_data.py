@@ -12,5 +12,5 @@ def gen_master(apps, schema_editor):
     market3: Market = Market(name="이모네옷가게", site_url="https://www.abc3.co.kr", email="test3@test.com", master_id=4, description='화려한 스타일을 추구합니다. #페북여신 #인스타여신')
     market3.save()
 
-    market3.description = "화려한 스타일을 추구합니다. #인스타여신 #트위터여신"
+    market3.description = "화려한 스타일을 추구합니다. #인스타여신 #트위터여신 #판교"
     market3.save()
