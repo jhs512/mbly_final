@@ -63,7 +63,7 @@ class ProductRealCreateSerializer(ModelSerializer):
 class ProductPatchSerializer(ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'reg_date', 'update_date', 'is_deleted', 'delete_date', 'is_hidden', 'is_sold_out', 'market',
+        fields = ['id', 'reg_date', 'update_date', 'delete_date', 'is_hidden', 'is_sold_out', 'market',
                   'name', 'display_name', 'price', 'sale_price', 'cate_item', 'hit_count', 'review_count',
                   'review_point']
 
@@ -74,7 +74,7 @@ class ProductCreateSerializer(ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'reg_date', 'update_date', 'is_deleted', 'delete_date', 'is_hidden', 'is_sold_out', 'market',
+        fields = ['id', 'reg_date', 'update_date', 'delete_date', 'is_hidden', 'is_sold_out', 'market',
                   'name', 'display_name', 'price', 'sale_price', 'cate_item', 'hit_count', 'review_count',
                   'review_point', 'product_reals']
 
@@ -102,6 +102,6 @@ class ProductSerializer(ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'reg_date', 'update_date', 'is_deleted', 'thumb_img_url', 'delete_date', 'is_hidden',
+        fields = ['id', 'reg_date', 'update_date', 'thumb_img_url', 'delete_date', 'is_hidden',
                   'is_sold_out', 'market', 'name', 'display_name', 'price', 'sale_price', 'cate_item', 'hit_count',
                   'review_count', 'review_point', 'product_reals']

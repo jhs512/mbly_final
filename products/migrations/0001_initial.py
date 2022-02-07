@@ -4,8 +4,6 @@ import django.db.models.expressions
 from django.conf import settings
 from django.db import migrations, models
 
-from products.gen_master_data import gen_master
-
 
 class Migration(migrations.Migration):
 
@@ -103,5 +101,5 @@ class Migration(migrations.Migration):
             model_name='productreal',
             constraint=models.UniqueConstraint(django.db.models.expressions.F('product'), django.db.models.expressions.F('option_1_name'), django.db.models.expressions.F('option_2_name'), django.db.models.expressions.F('option_3_name'), name='option_name_unique'),
         ),
-        migrations.RunPython(gen_master),
+
     ]

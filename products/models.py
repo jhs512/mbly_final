@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models import UniqueConstraint
 
 from accounts.models import User
+from base.models import SoftDeleteModel
 from markets.models import Market
 from qna.models import Question
 
@@ -17,7 +18,7 @@ class ProductCategoryItem(models.Model):
     name = models.CharField('이름', max_length=50)
 
 
-class Product(models.Model):
+class Product(SoftDeleteModel):
     class Meta:
         ordering = ('-id',)
         verbose_name = '상품들'
@@ -30,9 +31,6 @@ class Product(models.Model):
 
     reg_date = models.DateTimeField('등록날짜', auto_now_add=True)
     update_date = models.DateTimeField('갱신날짜', auto_now=True)
-
-    is_deleted = models.BooleanField('삭제여부', default=False)
-    delete_date = models.DateTimeField('삭제날짜', null=True, blank=True)
 
     market = models.ForeignKey(Market, on_delete=models.DO_NOTHING)
     name = models.CharField('상품명(내부용)', max_length=100)

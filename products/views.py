@@ -268,7 +268,6 @@ class MarketApiProductRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
         else:
             return ProductPatchSerializer
 
-
 # TODO 3주차 설명, Admin 용 상품 단건조회, 수정(PATCH), 삭제 처리 뷰
 class MarketApiProductRealListCreateView(ListCreateAPIView):
     permission_classes = [IsMarketMasterOrAdminUser]

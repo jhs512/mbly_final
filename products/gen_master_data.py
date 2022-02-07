@@ -14,7 +14,7 @@ def gen_master_product_category():
     ProductCategoryItem(name='블라우스').save()
 
 
-def gen_product(market_id: int, description:str, name: str, display_name: str, price: int, opt_1_names: tuple[str, ...], is_hidden: bool,
+def gen_product(market_id: int, description: str, name: str, display_name: str, price: int, opt_1_names: tuple[str, ...], is_hidden: bool,
                 is_sold_out: bool, hit_count: int, review_count: int, review_point: int) -> None:
     cate_item_id = ProductCategoryItem.objects.filter(name=name).first().id
 
