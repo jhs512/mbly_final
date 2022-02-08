@@ -17,3 +17,5 @@ def gen_master(apps, schema_editor):
         gender = User.GenderChoices.MALE
 
         User.objects.create_user(username=username, password=password, name=name, email=email, gender=gender)
+
+    User.objects.create_user(username="jangka512", password="jangka512", name="장희성", email="jangka512@gmail.com", gender=User.GenderChoices.MALE)

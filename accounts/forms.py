@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm, PasswordResetForm
 from django import forms
 
 from .models import User
@@ -65,3 +65,11 @@ class JoinForm(UserCreationForm):
             if qs.exists():
                 raise forms.ValidationError("이미 등록된 이메일 주소입니다.")
         return email
+
+
+# PasswordResetForm에서 바꾸고 싶은 부분이 있으면 바꾸면 됩니다.
+class MyPasswordResetForm(PasswordResetForm):
+    class Meta(PasswordResetForm.Meta):
+        model = User
+
+    pass
