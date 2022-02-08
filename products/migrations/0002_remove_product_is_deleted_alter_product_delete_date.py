@@ -6,7 +6,6 @@ from products.gen_master_data import gen_master
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('products', '0001_initial'),
     ]
@@ -19,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='delete_date',
-            field=models.DateTimeField(default=None, null=True, verbose_name='삭제날짜'),
+            field=models.DateTimeField(default=None, blank=True, null=True, verbose_name='삭제날짜'),
         ),
         migrations.RunPython(gen_master)
     ]
