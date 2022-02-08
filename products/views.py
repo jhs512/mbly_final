@@ -24,7 +24,24 @@ from qna.models import Question
 
 @require_GET
 def search_by_elastic(request: HttpRequest):
-    keyword, min_price, max_price = "소녀시대", 100, 1000000
+    # 카테고리 정보
+    product_cate_items = ProductCategoryItem.objects.all()
+
+    search_keyword = request.GET.get('search_keyword', '')
+    product_cate_item_id = request.GET.get('product_cate_item_id', '')
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+
+    # 선택된 카테고리 아이템의 이름을 저장, 없으면 빈값
+    product_cate_item_name, = (product_cate_item.name for product_cate_item in product_cate_items if
+                               product_cate_item.id == int(product_cate_item_id)) if product_cate_item_id else tuple(
+        [''])
+
+    if max_price and not min_price:
+        min_price = '0'
+
+    if min_price and not max_price:
+        max_price = '1000000000'
 
     elasticsearch = Elasticsearch(
         "http://192.168.56.102:9200", http_auth=('elastic', 'elasticpassword'), )
@@ -33,19 +50,36 @@ def search_by_elastic(request: HttpRequest):
         SELECT id
         FROM
         sample1_dev___products_product_type_2___v1
-        WHERE
+        WHERE 1 = 1
+        """
+
+    if (search_keyword):
+        elastic_sql += f"""
+        AND
         (
-            MATCH(name_nori, '{keyword}')
+            MATCH(name_nori, '{search_keyword}')
             OR
-            MATCH(display_name_nori, '{keyword}')
+            MATCH(display_name_nori, '{search_keyword}')
             OR
-            MATCH(description_nori, '{keyword}')
+            MATCH(description_nori, '{search_keyword}')
             OR
-            MATCH(cate_item_name_nori, '{keyword}')
+            MATCH(cate_item_name_nori, '{search_keyword}')
             OR
-            MATCH(market_name_nori, '{keyword}')
+            MATCH(market_name_nori, '{search_keyword}')
         )
-        AND sale_price BETWEEN {min_price} AND {max_price}
+        """
+
+    if min_price and max_price:
+        elastic_sql += f"""
+        AND
+        sale_price
+        BETWEEN
+        {min_price}
+        AND
+        {max_price}
+        """
+
+    elastic_sql += f"""
         ORDER BY score() DESC
     """
 
@@ -55,9 +89,33 @@ def search_by_elastic(request: HttpRequest):
 
     order = Case(*[When(id=id, then=pos) for pos, id in enumerate(product_ids)])
 
-    queryset = Product.objects.filter(id__in=product_ids).order_by(order)
+    products = Product \
+        .objects \
+        .filter(id__in=product_ids) \
+        .prefetch_related('cate_item') \
+        .prefetch_related('product_reals') \
+        .prefetch_related('market') \
+        .order_by(order)
 
-    return HttpResponse(queryset)
+    # 페이징
+    page = request.GET.get('page', '1')
+
+    if request.user.is_authenticated:
+        products = products \
+            .prefetch_related(
+            Prefetch('product_picked_users', queryset=User.objects.filter(id=request.user.id), to_attr='picked_user'))
+
+    if product_cate_item_id:
+        products = products.filter(cate_item_id=product_cate_item_id)
+
+    paginator = Paginator(products, 8)  # 페이지당 10개씩 보여주기
+    products = paginator.get_page(page)
+
+    return render(request, "products/product_list.html", {
+        "products": products,
+        "product_cate_item_name": product_cate_item_name,
+        "product_cate_items": product_cate_items
+    })
 
 
 # 일반사용자용 뷰 시작
@@ -267,6 +325,7 @@ class MarketApiProductRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
             return ProductSerializer
         else:
             return ProductPatchSerializer
+
 
 # TODO 3주차 설명, Admin 용 상품 단건조회, 수정(PATCH), 삭제 처리 뷰
 class MarketApiProductRealListCreateView(ListCreateAPIView):
