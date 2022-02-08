@@ -12,7 +12,7 @@ class SoftDeleteManager(models.Manager):
 
 
 class SoftDeleteModel(models.Model):
-    delete_date = models.DateTimeField('삭제날짜', null=True, default=None)
+    delete_date = models.DateTimeField('삭제날짜', blank=True, null=True, default=None)
 
     class Meta:
         abstract = True  # 상속 할수 있게
