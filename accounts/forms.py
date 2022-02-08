@@ -69,7 +69,5 @@ class JoinForm(UserCreationForm):
 
 # PasswordResetForm에서 바꾸고 싶은 부분이 있으면 바꾸면 됩니다.
 class MyPasswordResetForm(PasswordResetForm):
-    class Meta(PasswordResetForm.Meta):
-        model = User
 
     pass
