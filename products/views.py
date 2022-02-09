@@ -48,8 +48,7 @@ def search_by_elastic(request: HttpRequest):
 
     elastic_sql = f"""
         SELECT id
-        FROM
-        sample1_dev___products_product_type_2___v1
+        FROM sample1_dev___products_product_type_2___v1
         WHERE 1 = 1
         """
 
@@ -71,12 +70,7 @@ def search_by_elastic(request: HttpRequest):
 
     if min_price and max_price:
         elastic_sql += f"""
-        AND
-        sale_price
-        BETWEEN
-        {min_price}
-        AND
-        {max_price}
+        AND sale_price BETWEEN {min_price} AND {max_price}
         """
 
     elastic_sql += f"""
@@ -102,8 +96,7 @@ def search_by_elastic(request: HttpRequest):
 
     if request.user.is_authenticated:
         products = products \
-            .prefetch_related(
-            Prefetch('product_picked_users', queryset=User.objects.filter(id=request.user.id), to_attr='picked_user'))
+            .prefetch_related(Prefetch('product_picked_users', queryset=User.objects.filter(id=request.user.id), to_attr='picked_user'))
 
     if product_cate_item_id:
         products = products.filter(cate_item_id=product_cate_item_id)
@@ -111,7 +104,7 @@ def search_by_elastic(request: HttpRequest):
     paginator = Paginator(products, 8)  # 페이지당 10개씩 보여주기
     products = paginator.get_page(page)
 
-    return render(request, "products/product_list.html", {
+    return render(request, "products/product_list_by_elastic.html", {
         "products": products,
         "product_cate_item_name": product_cate_item_name,
         "product_cate_items": product_cate_items
