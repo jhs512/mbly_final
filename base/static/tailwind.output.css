@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.0.12 | MIT License | https://tailwindcss.com
+! tailwindcss v3.0.19 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -682,6 +682,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .t-rounded {
   border-radius: 0.25rem;
+}
+
+.t-border-4 {
+  border-width: 4px;
 }
 
 .t-border-2 {
