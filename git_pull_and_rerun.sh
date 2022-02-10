@@ -27,3 +27,5 @@ docker exec python__2 bash -c "cd /data/site_projects/python__2/src ; nohup guni
 
 # static collect 다시 수행
 docker exec -it python__2 bash -c "cd /data/site_projects/python__2/src ; echo yes | python manage.py collectstatic --settings=base.settings.prod"
+
+exit 0
