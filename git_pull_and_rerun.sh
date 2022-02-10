@@ -1,11 +1,12 @@
 # 테스트 환경에서 테스트 먼저
-docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; git pull origin master"
-
 {
   docker start python__2__test
+  docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; git pull origin master"
+  docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; pip install -r requirements/prod.txt"
   docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; python manage.py test --settings=base.settings.prod"
   docker stop python__2__test
 } || {
+  docker stop python__2__test
   exit 1
 }
 
@@ -21,8 +22,8 @@ docker exec python__2 bash -c "cd /data/site_projects/python__2/src/ ; pip insta
 # 마이그레이트
 docker exec python__2 bash -c "cd /data/site_projects/python__2/src/ ; python manage.py migrate --settings=base.settings.prod"
 
-# static collect 다시 수행
-docker exec -it python__2 bash -c "cd /data/site_projects/python__2/src ; echo yes | python manage.py collectstatic --settings=base.settings.prod"
-
 # 장고를 운영모드로 실행
 docker exec python__2 bash -c "cd /data/site_projects/python__2/src ; nohup gunicorn --bind=0.0.0.0:8000 base.wsgi &"
+
+# static collect 다시 수행
+docker exec -it python__2 bash -c "cd /data/site_projects/python__2/src ; echo yes | python manage.py collectstatic --settings=base.settings.prod"
