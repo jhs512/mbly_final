@@ -40,7 +40,7 @@ class User(AbstractUser):
     last_name = None
     date_joined = None
 
-    follower_set = models.ManyToManyField("self", blank=True)
+    followings = models.ManyToManyField("self", blank=True, symmetrical=False, related_name="followers")
 
     reg_date = models.DateTimeField('등록날짜', auto_now_add=True)
     update_date = models.DateTimeField('갱신날짜', auto_now=True)
@@ -137,3 +137,6 @@ class User(AbstractUser):
 
         sender_email = settings.WELCOME_EMAIL_SENDER
         send_mail(subject, content, sender_email, [self.email], fail_silently=False)
+
+    def follow(self, target_user: User) -> None:
+        self.followings.add(target_user)
