@@ -26,6 +26,6 @@ docker exec python__2 bash -c "cd /data/site_projects/python__2/src/ ; python ma
 docker exec python__2 bash -c "cd /data/site_projects/python__2/src ; nohup gunicorn --bind=0.0.0.0:8000 base.wsgi &"
 
 # static collect 다시 수행
-docker exec -it python__2 bash -c "cd /data/site_projects/python__2/src ; echo yes | python manage.py collectstatic --settings=base.settings.prod"
+docker exec python__2 bash -c "cd /data/site_projects/python__2/src ; echo yes | python manage.py collectstatic --settings=base.settings.prod"
 
 exit 0
