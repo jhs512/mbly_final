@@ -1,12 +1,23 @@
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Avg
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 
 from markets.models import Market
 from products.models import Product
 from qna.models import Question
 from summernote_support.models import RelatedAttachment
+
+
+@receiver(pre_delete, sender=Question)
+def on_pre_question_delete(sender, instance: Question, **kwargs):
+    related_attachments = instance.related_attachments.all()
+
+    for related_attachment in related_attachments:
+        attachment = related_attachment.attachment
+        related_attachment.delete()
+        attachment.file.delete()
+        attachment.delete()
 
 
 @receiver(post_save, sender=Question)
