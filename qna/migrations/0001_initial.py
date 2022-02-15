@@ -8,12 +8,12 @@ from qna.gen_master_data import gen_master
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
         ('contenttypes', '0002_remove_content_type_name'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('summernote_support', '0001_initial'),
     ]
 
     operations = [
@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('object_id', models.PositiveIntegerField(verbose_name='관련 데이터 번호')),
                 ('body', models.TextField(verbose_name='내용')),
                 ('is_complete', models.BooleanField(default=False, verbose_name='답변완료여부')),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='content_type_question', to='contenttypes.contenttype')),
+                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='contenttypes.contenttype')),
                 ('user', models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -43,9 +43,7 @@ class Migration(migrations.Migration):
                 ('question', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='qna.question')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
-            options={
-                'ordering': ['-id'],
-            },
+            options={'ordering': ['-id'], 'verbose_name': '질문', 'verbose_name_plural': '질문들'},
         ),
         migrations.RunPython(gen_master),
     ]

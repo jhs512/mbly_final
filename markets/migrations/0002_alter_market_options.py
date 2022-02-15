@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('markets', '0001_initial'),
     ]
@@ -12,6 +11,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='market',
-            options={'ordering': ('-id',), 'verbose_name': '마켓들', 'verbose_name_plural': '마켓'},
+            options={'ordering': ('-id',), 'verbose_name': '마켓', 'verbose_name_plural': '마켓들'},
         ),
     ]

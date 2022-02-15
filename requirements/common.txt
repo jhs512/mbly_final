@@ -13,3 +13,4 @@ django-debug-toolbar
 djangorestframework-simplejwt
 django-settings-export
 elasticsearch
+django-summernote

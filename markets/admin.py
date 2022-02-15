@@ -2,7 +2,7 @@ from django.contrib import admin
 
 
 # Register your models here.
-from markets.models import Market
+from .models import Market
 
 
 @admin.register(Market)

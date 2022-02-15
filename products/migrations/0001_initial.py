@@ -36,8 +36,8 @@ class Migration(migrations.Migration):
                 ('review_point', models.FloatField(default=0, verbose_name='리뷰평점')),
             ],
             options={
-                'verbose_name': '상품들',
-                'verbose_name_plural': '상품',
+                'verbose_name': '상품',
+                'verbose_name_plural': '상품들',
                 'ordering': ('-id',),
             },
         ),

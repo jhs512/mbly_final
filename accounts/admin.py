@@ -3,13 +3,13 @@ from django.contrib import admin
 # Register your models here.
 from django.utils.safestring import mark_safe
 
-from accounts.models import User
+from .models import User
 from products.models import ProductPickedUser
 
 
 class ProductPickedUserInline(admin.TabularInline):
-    verbose_name = '고객이 PICK한 상품들'
-    verbose_name_plural = '고객이 PICK한 상품'
+    verbose_name = '고객이 PICK한 상품'
+    verbose_name_plural = '고객이 PICK한 상품들'
     model = ProductPickedUser
 
 

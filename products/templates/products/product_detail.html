@@ -191,12 +191,6 @@
                         $(window).scrollTop($lastForm.offset().top - $(window).height() + $lastForm.height() + 50);
                     });
 
-
-
-
-
-
-
                 </script>
                 {% endif %}
 
@@ -224,7 +218,7 @@
                     <div class="t-flex mt-2">
                         <div class="t-break-all">
                             <img src="{{ question.user.profile_img_url }}"
-                                 class="t-rounded t-w-[40px] t-mr-[10px] t-float-left"> {{question.body|linebreaksbr}}
+                                 class="t-rounded t-w-[40px] t-mr-[10px] t-mb-[10px] t-float-left"> {{question.body|safe}}
                         </div>
                         <div class="t-flex-grow"></div>
                         {% if question.user == request.user %}
@@ -250,9 +244,7 @@
                 </li>
                 {% endfor %}
             </ul>
-            {% endif %}
-
-            {% if not questions %}
+            {% else %}
             <div class="card-body">
                 <div class="t-text-gray-400">
                     질문이 없습니다.
@@ -313,7 +305,7 @@
                 <div class="t-flex mt-2">
                     <span class="t-break-all">
                         <img src="{{ question.user.profile_img_url }}"
-                             class="t-rounded t-w-[40px] t-mr-[10px] t-float-left"> {{question.body|linebreaksbr}}
+                             class="t-rounded t-w-[40px] t-mr-[10px] t-mb-[10px] t-float-left"> {{question.body|safe}}
                     </span>
                     <div class="t-flex-grow"></div>
                     &nbsp;

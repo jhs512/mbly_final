@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'django_summernote',
     # 로컬
     'tags.apps.TagsConfig',
     'accounts.apps.AccountsConfig',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'qna.apps.QnaConfig',
     'cart.apps.CartConfig',
+    'summernote_support.apps.SummernoteSupportConfig',
 ]
 
 MIDDLEWARE = [
@@ -234,3 +236,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 WELCOME_EMAIL_SENDER = EMAIL_HOST_USER
+
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'width': '100%',
+        'lang' : 'ko-KR',
+    }
+}

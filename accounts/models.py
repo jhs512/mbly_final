@@ -33,8 +33,8 @@ class User(AbstractUser):
 
     class Meta:
         ordering = ['-id']
-        verbose_name = '회원들'
-        verbose_name_plural = '회원'
+        verbose_name = '회원'
+        verbose_name_plural = '회원들'
 
     first_name = None
     last_name = None

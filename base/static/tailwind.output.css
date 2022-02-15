@@ -536,6 +536,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 3rem;
 }
 
+.t-mb-\[10px\] {
+  margin-bottom: 10px;
+}
+
 .t-block {
   display: block;
 }
@@ -682,10 +686,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .t-rounded {
   border-radius: 0.25rem;
-}
-
-.t-border-4 {
-  border-width: 4px;
 }
 
 .t-border-2 {

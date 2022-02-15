@@ -21,8 +21,8 @@ class ProductCategoryItem(models.Model):
 class Product(SoftDeleteModel):
     class Meta:
         ordering = ('-id',)
-        verbose_name = '상품들'
-        verbose_name_plural = '상품'
+        verbose_name = '상품'
+        verbose_name_plural = '상품들'
 
     def __str__(self):
         return f"{self.id}, {self.display_name}"
