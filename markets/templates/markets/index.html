@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% load humanize %}
+
+{%block content %}
+<section class="section-market-list">
+    <div class="container">
+        {% for market in markets %}
+            <div>
+                {{market.id}}
+                /
+                {{market.name}}
+                /
+                {{market.description}}
+            </div>
+            <hr />
+        {% endfor %}
+    </div>
+</section>
+{%endblock%}

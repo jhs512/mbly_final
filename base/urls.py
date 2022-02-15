@@ -27,6 +27,7 @@ urlpatterns = [
     path('products/', include('products.urls')),
     path('qna/', include('qna.urls')),
     path('cart/', include('cart.urls')),
+    path('markets/', include('markets.urls')),
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
     path('identicon/image/<path:data>/', pydenticon_image, name='pydenticon_image'),
