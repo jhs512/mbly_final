@@ -3,19 +3,20 @@
   docker start python__2__test
   docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; git pull origin master"
   docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; pip install -r requirements/prod.txt"
-  declare OUTPUT_TEST=$(docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; python manage.py test -v 2 --settings=base.settings.prod 2>&1")
+  OUTPUT_TEST=$(docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; python manage.py test -v 2 --settings=base.settings.prod 2>&1")
   echo $OUTPUT_TEST
 
   if [[ $OUTPUT_TEST == *"FAILED"* ]]; then
     echo "HI"
     exit 1
   fi
-
-  docker stop python__2__test
 } || {
   docker stop python__2__test
   exit 1
 }
+
+# 기존장고 종료
+docker stop python__2__test
 
 # 기존장고 종료
 docker exec python__2 pkill "gunicorn"
