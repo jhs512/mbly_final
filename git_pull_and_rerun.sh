@@ -3,7 +3,14 @@
   docker start python__2__test
   docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; git pull origin master"
   docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; pip install -r requirements/prod.txt"
-  docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; python manage.py test --settings=base.settings.prod"
+  declare OUTPUT_TEST=$(docker exec python__2__test bash -c "cd /data/site_projects/python__2__test/src/ ; python manage.py test -v 2 --settings=base.settings.prod 2>&1")
+  echo $OUTPUT_TEST
+
+  if [[ $OUTPUT_TEST == *"FAILED"* ]]; then
+    echo "HI"
+    exit 1
+  fi
+
   docker stop python__2__test
 } || {
   docker stop python__2__test
