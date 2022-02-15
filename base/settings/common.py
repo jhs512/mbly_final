@@ -222,7 +222,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-SITE_NAME = "멋블리 ~~"
+SITE_NAME = "멋블리ㅋㅋ"
 
 SETTINGS_EXPORT = [
     'SITE_NAME',
