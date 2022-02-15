@@ -7,7 +7,7 @@ from db_var.models import DbVar
 
 
 def index(request: HttpRequest):
-    DbVar.set('name', '홍길동', datetime.datetime.now() + datetime.timedelta(minutes=-30))
+    DbVar.set('name', '홍길동', datetime.datetime.now() + datetime.timedelta(minutes=+30))
     print(DbVar.get('name', '하하'))
     #DbVar.remove('name')
 

@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.0.19 | MIT License | https://tailwindcss.com
+! tailwindcss v3.0.12 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -692,18 +692,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-width: 2px;
 }
 
-.\!t-border-\[10px\] {
-  border-width: 10px !important;
-}
-
-.t-border-\[10px\] {
-  border-width: 10px;
-}
-
-.t-border-b-\[10px\] {
-  border-bottom-width: 10px;
-}
-
 .t-border-b-\[2px\] {
   border-bottom-width: 2px;
 }
@@ -720,11 +708,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .t-bg-\[\#ffe812\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 232 18 / var(--tw-bg-opacity));
-}
-
-.\!t-bg-red-500 {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity)) !important;
 }
 
 .t-bg-\[\#00000000\] {
