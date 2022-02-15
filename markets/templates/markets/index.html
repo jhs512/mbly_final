@@ -4,16 +4,19 @@
 {%block content %}
 <section class="section-market-list">
     <div class="container">
-        {% for market in markets %}
-            <div>
+        <h1 class="t-font-bold">마켓 리스트(구현중)</h1>
+
+        <ul class="t-mt-3">
+            {% for market in markets %}
+            <li class="t-border-b-[2px] last:t-border-b-[0px] t-py-2">
                 {{market.id}}
                 /
                 {{market.name}}
                 /
                 {{market.description}}
-            </div>
-            <hr />
-        {% endfor %}
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 </section>
 {%endblock%}

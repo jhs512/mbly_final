@@ -46,13 +46,15 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'django_summernote',
     # 로컬
+    'db_var.apps.DbVarConfig',
     'tags.apps.TagsConfig',
+    'summernote_support.apps.SummernoteSupportConfig',
     'accounts.apps.AccountsConfig',
+    'qna.apps.QnaConfig',
     'markets.apps.MarketsConfig',
     'products.apps.ProductsConfig',
-    'qna.apps.QnaConfig',
     'cart.apps.CartConfig',
-    'summernote_support.apps.SummernoteSupportConfig',
+    'seed.apps.SeedConfig',
 ]
 
 MIDDLEWARE = [

@@ -26,12 +26,12 @@ class Market(models.Model):
     master = models.OneToOneField(User, on_delete=models.CASCADE)
     review_point = models.FloatField('리뷰평점', default=0)
     description = models.TextField('설명')
-    tag_set = models.ManyToManyField(Tag, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        old_tags = self.tag_set.all()
+        old_tags = self.tags.all()
         new_tags = self.extract_tag_list()
 
         delete_tags:list[Tag] = []
@@ -46,10 +46,10 @@ class Market(models.Model):
                 add_tags.append(new_tag)
 
         for delete_tag in delete_tags:
-            self.tag_set.remove(delete_tag)
+            self.tags.remove(delete_tag)
 
         for add_tag in add_tags:
-            self.tag_set.add(add_tag)
+            self.tags.add(add_tag)
 
     def extract_tag_list(self) -> list[Tag, ...]:
         tag_name_list = re.findall(r"#([a-zA-Z\dㄱ-힣]+)", self.description)

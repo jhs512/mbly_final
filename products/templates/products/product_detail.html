@@ -191,6 +191,11 @@
                         $(window).scrollTop($lastForm.offset().top - $(window).height() + $lastForm.height() + 50);
                     });
 
+
+
+
+
+
                 </script>
                 {% endif %}
 
@@ -277,12 +282,6 @@
                     $(window).on('load', function() {
                         $(window).scrollTop($lastForm.offset().top - $(window).height() + $lastForm.height() + 50);
                     });
-
-
-
-
-
-
                 </script>
             </div>
         </div>
@@ -329,7 +328,15 @@
     {% endif %}
 
     <div class="container t-mt-10">
-        <a href="#">
+        <div>
+            {% for tag in product.market.tags.all %}
+            <a href="{% url 'markets:list' %}?search_hash_tag_keyword={{tag.name}}">#{{tag.name}}</a>
+            {% endfor %}
+        </div>
+        <div class="t-block t-mt-3">
+            {{product.description}}
+        </div>
+        <a href="#" class="t-block t-mt-3">
             <img style="scroll-margin-top:72px;" id="product-img" class="t-w-full t-block rounded"
                  src="{{product.thumb_img_url}}" alt="">
         </a>

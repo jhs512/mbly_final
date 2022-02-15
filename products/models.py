@@ -48,7 +48,7 @@ class Product(SoftDeleteModel):
     review_count = models.PositiveIntegerField('리뷰수', default=0)
     review_point = models.FloatField('리뷰평점', default=0)
 
-    questions = GenericRelation(Question, related_query_name="question")
+    questions = GenericRelation(Question)
 
     product_picked_users = models.ManyToManyField(User, through='products.ProductPickedUser',
                                                   related_name='picked_products')

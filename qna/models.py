@@ -31,13 +31,14 @@ class Question(models.Model):
     body = models.TextField('내용')
     is_complete = models.BooleanField('답변완료여부', default=False)
 
-    related_attachments = GenericRelation(RelatedAttachment, related_query_name="related_attachment")
+    related_attachments = GenericRelation(RelatedAttachment)
 
     def extract_attachments(self) -> list[RelatedAttachment, ...]:
         img_urls = re.findall(r'src="(.*?)"', self.body)
         img_urls = [img_url.replace(settings.MEDIA_URL, '') for img_url in img_urls]
 
         return Attachment.objects.filter(file__in=img_urls)
+
 
 class Answer(models.Model):
     class Meta:
