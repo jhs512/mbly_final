@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('contenttypes', '0002_remove_content_type_name'),
-        ('django_summernote', '0003_alter_attachment_id'),
+        ('django_summernote', '__latest__'),
     ]
 
     operations = [
