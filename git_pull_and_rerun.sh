@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # 테스트 환경에서 테스트 먼저
 {
   docker start python__2__test
