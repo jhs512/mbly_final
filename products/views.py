@@ -20,6 +20,7 @@ from products.serializers import ProductSerializer, ProductCreateSerializer, Pro
     ProductPatchSerializer, ProductRealCreateSerializer
 from qna.forms import QuestionForm
 from qna.models import Question
+from summernote_support.models import RelatedAttachment
 
 
 @require_GET
@@ -171,6 +172,7 @@ def _get_product_detail_context(request: HttpRequest, product_id):
     questions = product \
         .questions \
         .select_related('user') \
+        .prefetch_related(Prefetch('related_attachments', queryset=RelatedAttachment.objects.order_by('id'), to_attr='id_asc_related_attachments'))\
         .order_by('-id')
 
     user_picked = product.product_picked_users.filter(id=request.user.id).exists()

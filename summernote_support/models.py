@@ -13,4 +13,8 @@ class RelatedAttachment(models.Model):
 
     content_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING)
     object_id = models.PositiveIntegerField('관련 데이터 번호')
-    attachment = models.ForeignKey(Attachment, on_delete=models.DO_NOTHING)
+    attachment = models.OneToOneField(Attachment, on_delete=models.DO_NOTHING)
+
+    @property
+    def url(self):
+        return self.attachment.file.url

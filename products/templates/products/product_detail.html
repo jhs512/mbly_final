@@ -196,6 +196,7 @@
 
 
 
+
                 </script>
                 {% endif %}
 
@@ -208,11 +209,56 @@
             </div>
 
             {% if questions %}
-            <ul class="list-group list-group-flush">
+            <script>
+                function QuestionList__itemBodyTextClicked(el) {
+                    const $itemBodyText = $(el);
+                    const $itemBody = $itemBodyText.parent();
+                    if ( $itemBody.hasClass('active') ) {
+                        $itemBody.removeClass('active');
+                        $itemBodyText.attr('title', '더보기');
+                    }
+                    else {
+                        $itemBody.addClass('active');
+                        $itemBodyText.attr('title', '숨기기');
+                    }
+                }
+            </script>
+            <style>
+                .question-list__item-body {
+                    height:100px;
+                }
+
+                .question-list__item-body.active {
+                    height:auto;
+                }
+
+                .question-list__item-body-text {
+                    cursor:pointer;
+                }
+
+                .question-list__item-body:not(.active) .question-list__item-body-text {
+                    position:relative;
+                }
+
+                .question-list__item-body:not(.active) .question-list__item-body-text::after {
+                    content:"";
+                    position:absolute;
+                    bottom:0;
+                    left:0;
+                    width:100%;
+                    height:50px;
+                    background-image:linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+                }
+            </style>
+            <ul class="question-list list-group list-group-flush">
                 {% for question in questions %}
                 <li class="list-group-item">
                     <div class="t-flex t-items-center mt-2">
                         <span class="badge bg-primary">No. {{question.id}}</span>
+
+                        {% if question.id_asc_related_attachments %}
+                        <span class="t-ml-1 t-leading-none t-self-self"><i class="fa-solid fa-image"></i></span>
+                        {% endif %}
 
                         <div class="t-flex-grow"></div>
 
@@ -220,12 +266,20 @@
                         <span>&nbsp;</span>
                         <span class="badge bg-secondary">{{question.reg_date|date:"y-m-d h:i"}}</span>
                     </div>
-                    <div class="t-flex mt-2">
-                        <div class="t-break-all">
-                            <img src="{{ question.user.profile_img_url }}"
-                                 class="t-rounded t-w-[40px] t-mr-[10px] t-mb-[10px] t-float-left"> {{question.body|safe}}
+                    <div class="t-flex mt-2 question-list__item-body t-overflow-hidden">
+                        <div title="더보기" class="t-flex-grow t-break-all question-list__item-body-text" onclick="QuestionList__itemBodyTextClicked(this);">
+                            <div class="t-flex">
+                                <img src="{{ question.user.profile_img_url }}"
+                                     class="t-rounded t-w-[40px]">
+
+                                {% if question.id_asc_related_attachments %}
+                                <img class="t-ml-2 t-w-[40px] t-h-[40px] t-object-fit t-rounded" src="{{question.id_asc_related_attachments.0.url}}" />
+                                {% endif %}
+                            </div>
+                            <div class="t-mt-3">
+                                {{question.body|safe}}
+                            </div>
                         </div>
-                        <div class="t-flex-grow"></div>
                         {% if question.user == request.user %}
                         &nbsp;
                         <div class="t-flex t-flex-shrink-0 t-flex-col t-items-start t-gap-2">
@@ -282,6 +336,7 @@
                     $(window).on('load', function() {
                         $(window).scrollTop($lastForm.offset().top - $(window).height() + $lastForm.height() + 50);
                     });
+
                 </script>
             </div>
         </div>
@@ -303,8 +358,13 @@
                 </div>
                 <div class="t-flex mt-2">
                     <span class="t-break-all">
-                        <img src="{{ question.user.profile_img_url }}"
-                             class="t-rounded t-w-[40px] t-mr-[10px] t-mb-[10px] t-float-left"> {{question.body|safe}}
+                        <div>
+                            <img src="{{ question.user.profile_img_url }}"
+                                 class="t-rounded t-w-[40px]">
+                        </div>
+                        <div class="t-mt-3">
+                            {{question.body|safe}}
+                        </div>
                     </span>
                     <div class="t-flex-grow"></div>
                     &nbsp;
