@@ -29,6 +29,3 @@ class AccountsTest(TestCase):
         # 역은 성립되지 않아야 한다.
         self.assertFalse(self.user1.followers.contains(self.user2))
 
-    def test_유저1이_유저2를_팔로우하면_유저2의_팔로워에는_유저1이_포함되어있어야_한다2(self):
-        self.assertTrue(True)
-
