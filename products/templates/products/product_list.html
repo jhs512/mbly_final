@@ -21,7 +21,7 @@
                 <option value="">전체</option>
                 {% for product_cate_item in product_cate_items %}
                 <option value="{{product_cate_item.id}}">
-                    <a href="?cate_item_id{{product_cate_item.id}}">{{product_cate_item.name}}</a>
+                    {{product_cate_item.name}}
                 </option>
                 {% endfor %}
             </select>

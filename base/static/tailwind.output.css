@@ -483,10 +483,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: 0px;
 }
 
-.t-float-left {
-  float: left;
-}
-
 .t-my-\[0px\] {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -524,12 +520,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 2.5rem;
 }
 
-.t-mr-\[10px\] {
-  margin-right: 10px;
-}
-
-.t-mb-\[10px\] {
-  margin-bottom: 10px;
+.t-ml-1 {
+  margin-left: 0.25rem;
 }
 
 .t-mt-2 {
@@ -538,10 +530,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .t-mt-12 {
   margin-top: 3rem;
-}
-
-.t-ml-1 {
-  margin-left: 0.25rem;
 }
 
 .t-block {
@@ -574,22 +562,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .t-h-\[10px\] {
   height: 10px;
-}
-
-.t-h-\[100px\] {
-  height: 100px;
-}
-
-.t-h-\[80px\] {
-  height: 80px;
-}
-
-.t-h-\[70px\] {
-  height: 70px;
-}
-
-.t-h-\[75px\] {
-  height: 75px;
 }
 
 .t-h-\[40px\] {
@@ -628,10 +600,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 40px;
 }
 
-.t-w-10 {
-  width: 2.5rem;
-}
-
 .t-max-w-screen-md {
   max-width: 768px;
 }
@@ -649,10 +617,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .t-flex-grow {
-  flex-grow: 1;
-}
-
-.t-grow {
   flex-grow: 1;
 }
 
@@ -694,14 +658,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .t-gap-\[20px\] {
   gap: 20px;
-}
-
-.t-self-end {
-  align-self: flex-end;
-}
-
-.t-self-center {
-  align-self: center;
 }
 
 .t-overflow-hidden {
@@ -754,11 +710,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: #00000000;
 }
 
-.t-bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-
 .t-object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -794,10 +745,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-align: center;
 }
 
-.t-align-bottom {
-  vertical-align: bottom;
-}
-
 .t-text-\[20px\] {
   font-size: 20px;
 }
@@ -805,22 +752,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .t-text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.t-text-\[2rem\] {
-  font-size: 2rem;
-}
-
-.t-text-\[1\.2rem\] {
-  font-size: 1.2rem;
-}
-
-.t-text-\[1\.5rem\] {
-  font-size: 1.5rem;
-}
-
-.t-text-\[1\.1rem\] {
-  font-size: 1.1rem;
 }
 
 .t-font-bold {
