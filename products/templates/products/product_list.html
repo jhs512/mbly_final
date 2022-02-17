@@ -82,7 +82,7 @@
                    href="{% url 'products:detail' product.id %}">
                     <span>{{ product.colors|safe }}</span>
                 </a>
-                {% if product.picked_user %}
+                {% if product.picked_users %}
                 <a class="t-text-center t-mt-2 t-no-underline t-text-[#ff0000] group-hover:t-text-blue-500"
                    href="{% url 'products:detail' product.id %}">
                     <i class="fas fa-heart"></i>

@@ -142,7 +142,7 @@ def product_list(request: HttpRequest):
     if request.user.is_authenticated:
         products = products \
             .prefetch_related(
-            Prefetch('product_picked_users', queryset=User.objects.filter(id=request.user.id), to_attr='picked_user'))
+            Prefetch('product_picked_users', queryset=User.objects.filter(id=request.user.id), to_attr='picked_users'))
 
     if search_keyword:
         products = products.filter(display_name__icontains=search_keyword)
