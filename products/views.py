@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
@@ -45,11 +46,11 @@ def search_by_elastic(request: HttpRequest):
         max_price = '1000000000'
 
     elasticsearch = Elasticsearch(
-        "http://192.168.56.102:9200", http_auth=('elastic', 'elasticpassword'), )
+        settings.ELASTIC_HOST, http_auth=(settings.ELASTIC_ID, settings.ELASTIC_PW), )
 
     elastic_sql = f"""
         SELECT id
-        FROM sample1_dev___products_product_type_2___v1
+        FROM sample1_dev___products_product_type_2
         WHERE 1 = 1
         """
 
@@ -66,6 +67,26 @@ def search_by_elastic(request: HttpRequest):
             MATCH(cate_item_name_nori, '{search_keyword}')
             OR
             MATCH(market_name_nori, '{search_keyword}')
+            OR
+            MATCH(name_chosung, '{search_keyword}')
+            OR
+            MATCH(display_name_chosung, '{search_keyword}')
+            OR
+            MATCH(description_chosung, '{search_keyword}')
+            OR
+            MATCH(cate_item_name_chosung, '{search_keyword}')
+            OR
+            MATCH(market_name_chosung, '{search_keyword}')
+            OR
+            MATCH(name_jamo, '{search_keyword}')
+            OR
+            MATCH(display_name_jamo, '{search_keyword}')
+            OR
+            MATCH(description_jamo, '{search_keyword}')
+            OR
+            MATCH(cate_item_name_jamo, '{search_keyword}')
+            OR
+            MATCH(market_name_jamo, '{search_keyword}')
         )
         """
 

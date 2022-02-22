@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import (
-    logout_then_login, LoginView,
+    logout_then_login, LoginView, PasswordResetView, PasswordResetConfirmView,
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import QuerySet
@@ -197,3 +197,17 @@ class ApiRefreshRefreshTokenView(GenericAPIView):
             'refresh': str(new_refresh_token),
             'access': str(new_access_token),
         })
+
+
+class MyPasswordResetView(SuccessMessageMixin, PasswordResetView):
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+
+        self.success_message = "비밀번호 재설정 메일이 발송되었습니다."
+
+
+class MyPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+
+        self.success_message = "비밀번호가 재설정 되었습니다."

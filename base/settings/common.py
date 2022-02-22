@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'django_summernote',
+    'django_extensions',
     # 로컬
     'db_var.apps.DbVarConfig',
     'tags.apps.TagsConfig',
@@ -244,4 +245,13 @@ SUMMERNOTE_CONFIG = {
         'width': '100%',
         'lang' : 'ko-KR',
     }
+}
+
+ELASTIC_HOST = os.environ.get("ELASTIC_HOST", "http://192.168.56.102:9200")
+ELASTIC_ID = os.environ.get('ELASTIC_ID', 'elastic')
+ELASTIC_PW = os.environ.get('ELASTIC_PW', 'elasticpassword')
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
 }

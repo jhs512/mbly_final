@@ -628,6 +628,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex-direction: column;
 }
 
+.t-flex-wrap {
+  flex-wrap: wrap;
+}
+
 .t-items-start {
   align-items: flex-start;
 }
@@ -644,12 +648,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: center;
 }
 
-.t-gap-3 {
-  gap: 0.75rem;
-}
-
 .t-gap-2 {
   gap: 0.5rem;
+}
+
+.t-gap-3 {
+  gap: 0.75rem;
 }
 
 .t-gap-10 {

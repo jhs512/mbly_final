@@ -1,3 +1,4 @@
+
 # 의존성
 
 - node js
@@ -314,3 +315,6 @@ GET _sql?format=json
   """
 }
 ```
+
+# https://dreampuf.github.io/GraphvizOnline
+- ./manage.py graph_models -a > my_project.dot

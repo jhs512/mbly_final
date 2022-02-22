@@ -11,13 +11,19 @@
             <form method="POST" action="">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                {% bootstrap_button button_type="submit" content="<i class='fas fa-sign-in-alt'></i> 로그인" %}
 
-                {% url 'main' as main_url %}
-                {% bootstrap_button button_type="link" href=main_url content="취소" button_class="btn-outline-primary" %}
+                <div class="t-flex t-gap-2 t-flex-wrap">
+                    {% bootstrap_button button_type="submit" content="<i class='fas fa-sign-in-alt'></i> 로그인" %}
 
-                {% url 'accounts:join' as accounts_join_url %}
-                {% bootstrap_button button_type="link" href=accounts_join_url content="회원가입" button_class="btn-outline-primary" %}
+                    {% url 'main' as main_url %}
+                    {% bootstrap_button button_type="link" href=main_url content="취소" button_class="btn-outline-primary" %}
+
+                    {% url 'accounts:join' as accounts_join_url %}
+                    {% bootstrap_button button_type="link" href=accounts_join_url content="회원가입" button_class="btn-outline-primary" %}
+
+                    <a href="{% url 'accounts:find_username' %}" class="btn btn-outline-primary"><i class="fas fa-users"></i> 아이디 찾기</a>
+                    <a href="{% url 'accounts:reset_password' %}" class="btn btn-outline-primary"><i class="fa-solid fa-lock-open"></i> 비밀번호 찾기</a>
+                </div>
             </form>
             <hr>
             <div class="t-py-2">

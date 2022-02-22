@@ -7,4 +7,5 @@ from .models import Market
 
 @admin.register(Market)
 class MarketAdmin(admin.ModelAdmin):
+    exclude = ['tags']
     pass
