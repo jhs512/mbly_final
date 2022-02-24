@@ -319,7 +319,3 @@ LOGGING = {
         },
     }
 }
-
-import logging
-logger = logging.getLogger('app') # 위에서 등록해 놓은 app 로거 사용
-logger.info("INFO 레벨로 출력") # 테스트
