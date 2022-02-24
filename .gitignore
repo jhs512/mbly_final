@@ -277,3 +277,4 @@ fabric.properties
 
 .idea
 node_modules
+logs
