@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# git_pull_and_rerun.sh 파일내용
+
 # 테스트 환경에서 테스트 먼저
 {
   docker start python__2__test
@@ -27,7 +29,7 @@ docker exec python__2 bash -ce "cd /data/site_projects/python__2/src/ ; pip inst
 docker exec python__2 bash -ce "cd /data/site_projects/python__2/src/ ; python manage.py migrate --settings=base.settings.prod"
 
 # 장고를 운영모드로 실행
-docker exec python__2 bash -ce "cd /data/site_projects/python__2/src ; nohup gunicorn --bind=0.0.0.0:8000 base.wsgi &"
+docker exec python__2 bash -ce "cd /data/site_projects/python__2/src ; nohup gunicorn --bind=0.0.0.0:8000 base.wsgi > /dev/null 2>&1 &"
 
 # static collect 다시 수행
 docker exec python__2 bash -ce "cd /data/site_projects/python__2/src ; echo yes | python manage.py collectstatic --settings=base.settings.prod"
